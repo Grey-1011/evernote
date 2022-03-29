@@ -1,32 +1,57 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Sidebar/>
     <router-view/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+<script>
+import Sidebar from '@/components/Sidebar'
+export default {
+  name:'app',
+  components: {Sidebar}
+}
+</script>
+
+<style>
+@import '//at.alicdn.com/t/font_3287615_j457c90xc8s.css';
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,body, #app {
+  height: 100%;
+}
+body{
+  font-size: 14px;
+  background: #eee;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+}
+a{
+  text-decoration: none;
+  color: #444;
+}
+ul,ol{
+  list-style: none;
+}
+/*.btn{*/
+/*  color: #666;*/
+/*  font-size: 12px;*/
+/*  padding: 2px 4px;*/
+/*  background: #fff;*/
+/*  box-shadow: 0 0 2px 0 #ccc;*/
+/*  border: none;*/
+/*  cursor: pointer;*/
+/*  display: inline-block;*/
+/*}*/
+
+#app{
+  display: flex;
+  align-items: stretch;
 }
 
-#nav {
-  padding: 30px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
