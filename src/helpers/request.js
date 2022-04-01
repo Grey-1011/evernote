@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
-axios.defaults.baseURL = 'http://note-server.hunger-valley.com'
+axios.defaults.baseURL = 'https://note-server.hunger-valley.com'//若 后端接口并没有写好呢？
+axios.defaults.withCredentials = true
 
 export default function request(url,type = 'GET',data = {}){
     return new Promise((resolve,reject)=>{
@@ -25,8 +26,8 @@ export default function request(url,type = 'GET',data = {}){
                 reject(res.data)
             }
         }).catch(err => {
-            console.error({message:'网络异常'})
-            reject({message:'网络异常'})
+            console.error({msg:'网络异常'})
+            reject({msg:'网络异常'})
             return err
         })
     })

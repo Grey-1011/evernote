@@ -6,16 +6,31 @@
       <router-link to="/notebooks"><i class="iconfont icon-notes"></i>All notes</router-link>
       <router-link to="/trash/2"><i class="iconfont icon-Trash"></i>Trash</router-link>
     </div>
-    <div class="logout" @click="onLogout">
-      <i class="iconfont icon-logout"></i>
+    <div class="logout">
+      <i class="iconfont icon-logout" @click="logout"></i>
     </div>
   </div>
 </template>
 
 <script>
 import Avatar from '@/components/Avatar'
+import Auth from '@/apis/auth'
+
 export default {
-  components: {Avatar}
+  components: {Avatar},
+  methods:{
+    logout(){
+      console.log('logout')
+      Auth.logout().then(data=>{
+        this.$router.push({path:'/login'})
+        console.log(data)})
+      // request('/auth/logout')
+      //   .then(data => {
+      //     console.log(data)
+      //   })
+    }
+  }
+
 }
 </script>
 

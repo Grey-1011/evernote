@@ -37,12 +37,14 @@
 </template>
 
 <script>
-import request from '@/helpers/request'
+import Auth from '@/apis/auth'
 
-request('/auth/login','POST',{username:'hunger',password:'123456'})
-    .then(data=>{
-        console.log(data)
-    })
+// Auth.getInfo().then(data=>{
+//   console.log(data)
+// })
+// request('/auth').then(data=>{
+//   console.log(data)
+// })
 
 export default {
   data(){
@@ -85,9 +87,26 @@ export default {
         this.register.notice = result2.notice
         return
       }
-      this.register.isError = false
-      this.register.notice =''
+
       console.log(`start register..., username: ${this.register.username},password:${this.register.password}`)
+      // 接口封装成 API
+      Auth.register({username:this.register.username,password:this.register.password})
+        .then(data =>{
+          this.register.isError = false
+          this.register.notice =''
+          this.$router.push({path:'/notebooks'})
+          console.log(data)
+          }).catch(data => {
+            this.register.isError =  true
+            this.register.notice = data.msg
+          })
+      // request('/auth/register','POST',
+      //     {
+      //       username:this.register.username
+      //       ,password:this.register.password})
+      //   .then(data =>{
+      //     console.log(data)
+      //   })
     },
 
     onLogin(){
@@ -103,9 +122,27 @@ export default {
         this.login.notice = result4.notice
         return
       }
-      this.login.isError = false
-      this.login.notice = ''
+
       console.log(`start login..., username: ${this.login.username}, password: ${this.login.password}`)
+      //封装接口
+      Auth.login({username:this.login.username,password:this.login.password})
+          .then(data=>{
+            this.login.isError = false
+            this.login.notice = ''
+            this.$router.push({path:'/notebooks'}) // 登录成功后跳转至 笔记本列表页面
+            console.log(data)
+            console.log('start redirect...')
+          }).catch(data =>{ // 因为这里是 箭头函数，所以这里的 this 和 外面的 this 是一致的
+            this.login.isError = true
+            this.login.notice = data.msg
+            })
+      // request('/auth/login','POST',
+      //     {
+      //       username:this.login.username,
+      //       password:this.login.password })
+      //   .then(data =>{
+      //     console.log(data)
+      //   })
     },
     validUsername(username){
       return{
