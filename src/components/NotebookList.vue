@@ -9,12 +9,22 @@
 </template>
 
 <script>
+import Auth from '@/apis/auth'
+
 export default {
   name:'Notebooks',
   data(){
     return{
       message:'notebooks page'
     }
+  },
+  created() {
+    Auth.getInfo()
+      .then(res =>{
+        if(!res.isLogin){
+          this.$router.push({path:'/login'})
+        }
+      })
   }
 
 }

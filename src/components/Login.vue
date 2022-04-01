@@ -38,6 +38,7 @@
 
 <script>
 import Auth from '@/apis/auth'
+import Bus from '@/helpers/bus'
 
 // Auth.getInfo().then(data=>{
 //   console.log(data)
@@ -94,19 +95,14 @@ export default {
         .then(data =>{
           this.register.isError = false
           this.register.notice =''
+          Bus.$emit('userInfo',{username:this.register.username})
+
           this.$router.push({path:'/notebooks'})
           console.log(data)
           }).catch(data => {
             this.register.isError =  true
             this.register.notice = data.msg
           })
-      // request('/auth/register','POST',
-      //     {
-      //       username:this.register.username
-      //       ,password:this.register.password})
-      //   .then(data =>{
-      //     console.log(data)
-      //   })
     },
 
     onLogin(){
@@ -129,6 +125,8 @@ export default {
           .then(data=>{
             this.login.isError = false
             this.login.notice = ''
+            Bus.$emit('userInfo',{ username:this.login.username }) // 触发用户信息事件
+
             this.$router.push({path:'/notebooks'}) // 登录成功后跳转至 笔记本列表页面
             console.log(data)
             console.log('start redirect...')
@@ -136,17 +134,10 @@ export default {
             this.login.isError = true
             this.login.notice = data.msg
             })
-      // request('/auth/login','POST',
-      //     {
-      //       username:this.login.username,
-      //       password:this.login.password })
-      //   .then(data =>{
-      //     console.log(data)
-      //   })
     },
     validUsername(username){
       return{
-        isValid:/^[a-zA-Z_0-9\u4e00-\u9fa5]{3,15}$/.test(username),
+        isValid:/^[a-zA-Z_0-9\u4e00-\u9fa5]{3,9}$/.test(username),
         notice:'用户名要求3~15个英文、数字、下划线、中文字符'
       }
     },

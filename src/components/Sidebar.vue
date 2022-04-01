@@ -15,6 +15,7 @@
 <script>
 import Avatar from '@/components/Avatar'
 import Auth from '@/apis/auth'
+import Bus from '@/helpers/bus'
 
 export default {
   components: {Avatar},
@@ -22,6 +23,7 @@ export default {
     logout(){
       console.log('logout')
       Auth.logout().then(data=>{
+        Bus.$emit('userInfo',{username:Avatar.data().username})
         this.$router.push({path:'/login'})
         console.log(data)})
       // request('/auth/logout')
