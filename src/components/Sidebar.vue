@@ -40,7 +40,6 @@ export default {
 #sidebar {
   position: relative;
   width: 232px;
-  //text-align: center;
   background: #1f1f1f;
 
   .icons {
