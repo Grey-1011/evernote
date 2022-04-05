@@ -66,15 +66,7 @@ export default {
                 .then(res => {
                   res.data.updatedAt = friendlyDate(res.data.updatedAt)
                   this.notebooks.unshift(res.data)
-                  this.$message({
-                    type: 'success',
-                    message: res.msg
-                  })
-                }).catch((res) => {
-                  this.$message({
-                    type: 'error',
-                    message: res.msg
-                  })
+                  this.$message.success(res.msg)
                 })
           })
     },
@@ -84,6 +76,7 @@ export default {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         inputPattern: /^.{1,30}$/,
+        inputValue:notebook.title,
         inputErrorMessage: '笔记本标题不能为空，且不能超过30个字符'
       })
           .then(({value}) => {
@@ -91,15 +84,7 @@ export default {
             return Notebooks.updateNotebook(notebook.id,{title})
                 .then(res => {
                   notebook.title = title
-                  this.$message({
-                    type: 'success',
-                    message: res.msg
-                  })
-                }).catch((res) => {
-                  this.$message({
-                    type: 'error',
-                    message: res.msg
-                  })
+                  this.$message.success(res.msg)
                 })
           })
     },
@@ -112,17 +97,8 @@ export default {
         return Notebooks.deleteNotebook(notebook.id)
             .then( res =>{
               this.notebooks.splice(this.notebooks.indexOf(notebook),1)
-              this.$message({
-                type: 'success',
-                message: res.msg
-              });
-            }).catch((res) => {
-              console.log('hhh')
-              this.$message({
-                type: 'error',
-                message: res.msg
-            });
-        });
+              this.$message.success(res.msg)
+            })
       })
     }
   }

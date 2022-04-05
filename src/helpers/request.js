@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {Message} from 'element-ui'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 axios.defaults.baseURL = 'https://note-server.hunger-valley.com'//若 后端接口并没有写好呢？
@@ -22,11 +23,19 @@ export default function request(url,type = 'GET',data = {}){
             if(res.status === 200){
                 resolve(res.data)
             }else {
-                console.log(res.data)
+                Message.error(res.data.msg)
+                // Message({
+                //     type:'error',
+                //     message: res.data.msg
+                // })
                 reject(res.data)
             }
         }).catch(err => {
-            console.error({msg:'网络异常'})
+            Message.error('网络异常')
+            // Message({
+            //     type:'error',
+            //     message: '网络异常'
+            // })
             reject({msg:'网络异常'})
             return err
         })
