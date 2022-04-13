@@ -1,0 +1,59 @@
+#trash{
+  display: flex;
+
+  flex: 1;
+}
+
+.trash-sidebar{
+  width: 336px;
+  background: #f8f8f8;
+  border-right: 1px solid #e6e6e6;
+
+  .trash-title{
+    padding: 16px;
+    font-size: 18px;
+    font-weight: 600;
+
+  }
+  .count{
+    padding: 16px;
+    color: #acacac;
+
+  }
+
+  .notes{
+    display: flex;
+    flex-direction: column;
+
+    li{
+      .router-link {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid #e6e6e6;
+        padding: 8px 16px;
+      }
+
+      .router-link-exact-active{
+        background: #f2f2f2;
+      }
+
+      .title{
+        color: #343434;
+        font-size: 16px;
+        font-weight: 360;
+      }
+
+      .date{
+        padding-top: 16px;
+        color: #a7a7a7;
+        font-size: 4px;
+      }
+    }
+    li:hover{
+      background: #f2f2f2;
+    }
+
+  }
+
+
+}

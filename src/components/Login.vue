@@ -37,17 +37,10 @@
 </template>
 
 <script>
-import Auth from '@/apis/auth'
-import Bus from '@/helpers/bus'
-
-// Auth.getInfo().then(data=>{
-//   console.log(data)
-// })
-// request('/auth').then(data=>{
-//   console.log(data)
-// })
+import {mapActions} from 'vuex'
 
 export default {
+  name:'Login',
   data(){
     return{
       isShowLogin:true,
@@ -67,6 +60,10 @@ export default {
     }
   },
   methods:{
+    ...mapActions({
+      loginUser:'login',
+      registerUser:'register',
+    }),
     showLogin(){
       this.isShowLogin = true
       this.isShowRegister = false
@@ -91,14 +88,13 @@ export default {
 
       console.log(`start register..., username: ${this.register.username},password:${this.register.password}`)
       // 接口封装成 API
-      Auth.register({username:this.register.username,password:this.register.password})
-        .then(data =>{
+      this.registerUser({username:this.register.username,password:this.register.password})
+        .then(() =>{
           this.register.isError = false
           this.register.notice =''
-          Bus.$emit('userInfo',{username:this.register.username})
+          // Bus.$emit('userInfo',{username:this.register.username})
 
           this.$router.push({path:'/notebooks'})
-          console.log(data)
           }).catch(data => {
             this.register.isError =  true
             this.register.notice = data.msg
@@ -121,14 +117,13 @@ export default {
 
       console.log(`start login..., username: ${this.login.username}, password: ${this.login.password}`)
       //封装接口
-      Auth.login({username:this.login.username,password:this.login.password})
-          .then(data=>{
+      this.loginUser({username:this.login.username,password:this.login.password})
+          .then(()=>{
             this.login.isError = false
             this.login.notice = ''
-            Bus.$emit('userInfo',{ username:this.login.username }) // 触发用户信息事件
+            // Bus.$emit('userInfo',{ username:this.login.username }) // 触发用户信息事件
 
             this.$router.push({path:'/notebooks'}) // 登录成功后跳转至 笔记本列表页面
-            console.log(data)
             console.log('start redirect...')
           }).catch(data =>{ // 因为这里是 箭头函数，所以这里的 this 和 外面的 this 是一致的
             this.login.isError = true
@@ -185,7 +180,6 @@ export default {
 .main{
   flex: 1;
   background: url(../assets/loginBackground.jpg) center center no-repeat;
-  //background-size: contain;
   background-size: cover;
 }
 

@@ -30,15 +30,16 @@ export default {
     deleteNotebook(notebookId){
         return request(URL.DELETE.replace(':id',notebookId),'DELETE')
     },
-    addNotebook({title = ''} = {title:''}){
+    addNotebook({title= ''} = {title:''}){
         return new Promise((resolve,reject)=> {
             request(URL.ADD, 'POST', {title})
                 .then(res => {
                     console.log('res.data', res.data)
+                    res.data.updatedAt = friendlyDate(res.data.updatedAt)
                     res.data.createdAt = dayjs(res.data.createdAt).locale('zh-cn').format('YYYY/MM/DD/HH:mm')
                     resolve(res)
                 }).catch(res=>{
-                console.log(reject(res))
+                    reject(res)
             })
         })
     }

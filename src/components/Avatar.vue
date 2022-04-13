@@ -6,35 +6,30 @@
 </template>
 
 <script>
-import Auth from '@/apis/auth'
-import Bus from '@/helpers/bus'
+import {mapGetters,mapActions} from 'vuex'
 
 export default {
-  data(){
-    return {
-        username:'Not login',
-    }
+  data() {
+    return {}
   },
   created() {
-    Bus.$on('userInfo',user =>{
-      this.username = user.username
-    })
-      Auth.getInfo()
-          .then(res =>{
-            console.log(res)
-            if(res.isLogin){
-                this.username = res.data.username
-            }
-          })
+    this.setUser()
   },
-  computed:{
-    slug(){
-      return this.username.charAt(0)
+  methods: {
+    ...mapActions({
+      setUser: 'checkLogin'
+    })
+  },
+    computed: {
+      ...mapGetters([
+        'username',
+        'slug'
+      ]),
+
+      displayName() {
+        return this.username
+      }
     },
-    displayName(){
-      return this.username
-    }
-  }
 }
 </script>
 
@@ -47,16 +42,16 @@ span{
   line-height: 32px;
   border-radius: 50%;
   background: #c6f88d;
-  color: #fff;
+  color: #cccccc;
   text-shadow: 1px 0 1px #795c19;
-  font-weight: bold;
   text-transform: uppercase;
   font-size: 18px;
-  margin: 16px 0 24px 16px;
+  margin: 16px 0 32px 16px;
 }
 h3{
   display: inline-block;
   padding-left: 8px;
-  color: #ffffff;
+  color: #cccccc;
+  font-weight: 400;
 }
 </style>

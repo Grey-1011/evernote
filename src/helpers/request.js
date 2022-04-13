@@ -24,18 +24,10 @@ export default function request(url,type = 'GET',data = {}){
                 resolve(res.data)
             }else {
                 Message.error(res.data.msg)
-                // Message({
-                //     type:'error',
-                //     message: res.data.msg
-                // })
                 reject(res.data)
             }
         }).catch(err => {
             Message.error('网络异常')
-            // Message({
-            //     type:'error',
-            //     message: '网络异常'
-            // })
             reject({msg:'网络异常'})
             return err
         })

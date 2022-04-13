@@ -5,17 +5,18 @@ import store from './store'
 
 
 
-import {Message, MessageBox} from 'element-ui'
-// import ElementUI from 'element-ui';
+// import {Message, MessageBox} from 'element-ui'
+import ElementUI from 'element-ui';
+
 import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.config.productionTip = false
 
-Vue.prototype.$messageBox = MessageBox
-Vue.prototype.$prompt = MessageBox.prompt
-Vue.prototype.$message = Message
-Vue.prototype.$confirm = MessageBox.confirm
-
+// Vue.prototype.$messageBox = MessageBox
+// Vue.prototype.$prompt = MessageBox.prompt
+// Vue.prototype.$message = Message
+// Vue.prototype.$confirm = MessageBox.confirm
+Vue.use(ElementUI)
 new Vue({
   router,
   store,

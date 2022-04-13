@@ -1,0 +1,61 @@
+.note-sidebar{
+  width: 320px;
+  background: #f8f8f8;
+  border-right: 1px solid #e6e6e6;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
+  }
+
+  .input{
+    width: 288px;
+    margin: 24px 16px;
+  }
+
+  .el-dropdown-link{
+    cursor: pointer;
+    color: #333333;
+    font-size: 18px;
+    font-weight: 800;
+    margin-left: 16px;
+  }
+
+  .el-icon-arrow-down{
+    font-size: 12px;
+  }
+
+
+  .notes{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    li{
+      & .router-link {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 16px;
+        border-top: 1px solid #e6e6e6;
+
+      }
+      .router-link-exact-active{
+        background: #f2f2f2;
+      }
+      & .title{
+        color: #343434;
+        font-size: 16px;
+        font-weight: 400;
+      }
+      & .date{
+        padding-top: 32px;
+        color: #a7a7a7;
+        font-size: 4px;
+      }
+    }
+  }
+
+}
+
+
+
+
+

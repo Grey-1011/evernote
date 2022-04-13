@@ -1,0 +1,56 @@
+.trash-detail{
+  display: flex;
+  flex-direction: column;
+
+  flex: 1;
+
+  .note-bar{
+    padding: 16px;
+    border-bottom: 1px solid #cccccc;
+
+    &::after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    span{
+      font-size: 14px;
+      color: #999;
+      margin-right: 8px;
+    }
+
+    .btn{
+      float: right;
+      color: #999;
+      margin-left: 4px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+  }
+  .note-title{
+    span{
+      width: 100%;
+      padding: 10px 20px;
+      font-size: 18px;
+
+    }
+
+  }
+  .editor{
+    height: ~"calc(100%-95px)";
+    position: relative;
+
+    .preview{
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+    }
+  }
+
+
+
+
+}
