@@ -27,11 +27,11 @@ export default new Router({
       component: ()=> import('@/components/Login.vue')
     },
     {
-      path: '/note/',
+      path: '/note',
       component: () => import('@/components/NoteDetail')
     },
     {
-      path:'/trash/',
+      path:'/trash',
       component: () => import('@/components/TrashDetail')
     }
   ]
